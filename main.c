@@ -3,6 +3,7 @@
 #include "functions.h"
 #include "ReadEeprom.h"
 #include "controller_context.h"
+#include "debug_led.h"
 
 int main()
 {
@@ -31,11 +32,9 @@ int main()
 
 			case ERROR:
 			default:
-				printf("ERRORR");
-				return;
 				break;
 		}
-	TimerISR();
+		debug_led();
 	}
 	return 0;
 }

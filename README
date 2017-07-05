@@ -3,8 +3,11 @@
 
 
 # Notes #
+The first commit is the simplest working solution, as new features are being added it is being pushed into de repository
 
 # ASSUMPTIONS #
 
--EEPROM sends with the data a data integrity system detectable by the CPU (e.g. CRC or parity bit)
--Since the API does not include the address to call the EEPROM, I created a new function with it
+-EEPROM sends with the data a data integrity system detectable by the CPU (e.g. CRC or parity bit).
+-Since the API does not include the address to call the EEPROM, I created a new function with it.
+-The controller_context allows access to the system variables from diferent interrupts and functions, so keep an eye on multiple access.
+-The overflow of the int32 for the timer does not affect the periodicity of the debug LEDs.

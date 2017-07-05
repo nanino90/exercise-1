@@ -19,14 +19,16 @@ void TimerInit(void)
 
 void TimerISR(void)
 {
-	static CONTROLLER_CONTEXT* cc;
+	static CONTROLLER_CONTEXT* cc = NULL;
+	if(cc==NULL)
+		cc = get_controller_context();
+
 //Disable the CS for the EEPROM to avoid collisions
 	SPIEepromDisable();
 
 	if(CheckSensor())
 	{
 		RobotStop();
-		cc = get_controller_context();
 		cc->status = ERROR;
 	}
 	return;
