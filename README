@@ -1,0 +1,10 @@
+# README file for exercise-1
+# Ignacio Utrilla - 2017
+
+
+# Notes #
+
+# ASSUMPTIONS #
+
+-EEPROM sends with the data a data integrity system detectable by the CPU (e.g. CRC or parity bit)
+-Since the API does not include the address to call the EEPROM, I created a new function with it
