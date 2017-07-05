@@ -1,5 +1,5 @@
 #Gitignore file
 *.o
 *.gch
-*.exe 
+*.bin 
 

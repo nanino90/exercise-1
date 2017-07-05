@@ -1,4 +1,5 @@
 #include "functions.h"
+#include "CheckSensor.h"
 
 void RobotTask(uint8_t u8Command)
 {
@@ -17,23 +18,15 @@ void TimerInit(void)
 
 void TimerISR(void)
 {
-	uint8_t sensor_value = 0; 
-
 //Disable the CS for the EEPROM to avoid collisions
 	SPIEepromDisable();
-	SPISensorEnable();
 
-	sensor_value = SPIRead();
-
-	if(sensor_value > 128)
+	if(CheckSensor())
 	{
 		RobotStop();
-
-		SPISensorDisable();
 //Stay in the interrupt forever
 		while(1);
 	}
-
 	return;
 }
 

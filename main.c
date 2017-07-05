@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include "functions.h"
+#include "ReadEeprom.h"
 
 int main()
 {
@@ -14,11 +15,7 @@ int main()
 	for( ; ; )
 	{
 
-		SPIEepromEnable();
-
-		command = SPIRead();
-
-		SPIEepromDisable();
+		command =  ReadEeprom();
 
 		RobotTask(command);
 	
