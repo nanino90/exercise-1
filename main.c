@@ -2,10 +2,13 @@
 #include <stdint.h>
 #include "functions.h"
 #include "ReadEeprom.h"
+#include "controller_context.h"
 
 int main()
 {
-	uint8_t command = 0;
+	CONTROLLER_CONTEXT* cc;
+
+	cc = initialize_controller_context();
 
 //Initialize peripherals
 	SPIInit();
@@ -14,11 +17,25 @@ int main()
 //Task loop
 	for( ; ; )
 	{
+		switch(cc->status)
+		{
+			case READ_EEPROM:
+			cc->command = ReadEeprom();
+			cc->status = EXECUTE_COMMAND;
+				break;
 
-		command =  ReadEeprom();
+			case EXECUTE_COMMAND:
+			cc->status =READ_EEPROM;
+			RobotTask(cc->command);
+				break;
 
-		RobotTask(command);
-	
+			case ERROR:
+			default:
+				printf("ERRORR");
+				return;
+				break;
+		}
+	TimerISR();
 	}
 	return 0;
 }

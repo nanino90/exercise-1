@@ -5,12 +5,12 @@
 
 uint8_t ReadSensor()
 {
-	uint8_t value=0;
+	static uint8_t value=0;
 
 	SPISensorEnable();
 
-	value = SPIRead();
-
+//	value = SPIRead();
+++value;
 	SPISensorDisable();
 
 	return value;

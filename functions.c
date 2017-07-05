@@ -1,5 +1,6 @@
 #include "functions.h"
 #include "CheckSensor.h"
+#include "controller_context.h"
 
 void RobotTask(uint8_t u8Command)
 {
@@ -18,14 +19,15 @@ void TimerInit(void)
 
 void TimerISR(void)
 {
+	static CONTROLLER_CONTEXT* cc;
 //Disable the CS for the EEPROM to avoid collisions
 	SPIEepromDisable();
 
 	if(CheckSensor())
 	{
 		RobotStop();
-//Stay in the interrupt forever
-		while(1);
+		cc = get_controller_context();
+		cc->status = ERROR;
 	}
 	return;
 }
