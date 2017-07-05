@@ -2,57 +2,74 @@
 
 void RobotTask(uint8_t u8Command)
 {
-return;
+	return;
 }
 
 void RobotStop (void)
 {
-return;
+	return;
 }
 
 void TimerInit(void)
 {
-return;
+	return;
 }
 
 void TimerISR(void)
 {
-return;
+	uint8_t sensor_value = 0; 
+
+//Disable the CS for the EEPROM to avoid collisions
+	SPIEepromDisable();
+	SPISensorEnable();
+
+	sensor_value = SPIRead();
+
+	if(sensor_value > 128)
+	{
+		RobotStop();
+
+		SPISensorDisable();
+//Stay in the interrupt forever
+		while(1);
+	}
+
+	return;
 }
 
 uint32_t TimetGetus(void)
 {
-return 0;
+	return 0;
 }
 
 void SPIInit(void)
 {
-return;
+	return;
 }
 
 void SPIEepromEnable(void)
 {
-return;
+	return;
 }
 
 void SPIEepromDisable(void)
 {
-return;
+	return;
 }
 
 void SPISensorEnable(void)
 {
-return;
+	return;
 }
 
 void SPISensorDisable(void)
 {
-return;
+	return;
 }
 
 uint8_t SPIRead(void)
 {
-return 0;
+	return 0;
 }
 
 

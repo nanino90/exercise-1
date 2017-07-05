@@ -4,7 +4,7 @@
 CC=gcc
 OFLAGS=-Wall -c
 CFLAGS=-Wall -o
-BIN=e1
+BIN=e1.bin
 
 SRCS=main.c functions.c
 OBJS=$(patsubst %c,%o,$(SRCS) )
