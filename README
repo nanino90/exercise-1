@@ -3,11 +3,26 @@
 
 
 # Notes #
-The first commit is the simplest working solution, as new features are being added it is being pushed into de repository
+The git tag 'minimal' is the simplest working solution, as new features are being added it is being pushed into de repository.
 
-# ASSUMPTIONS #
 
--EEPROM sends with the data a data integrity system detectable by the CPU (e.g. CRC or parity bit).
--Since the API does not include the address to call the EEPROM, I created a new function with it.
--The controller_context allows access to the system variables from diferent interrupts and functions, so keep an eye on multiple access.
+-The interrupt function is called through the IVT of the hardware running the code thus does not need to be called in the code
+-EEPROM sends with the data a data integrity system detectable by the CPU (e.g. CRC or parity bit) and will ask for last address in case of collision or interruption of last request.
+-The code could be more efficient and traceable if functions requiring a timed proccesses returned a value true or false to check the correct execution.
+-The controller_context allows access to the system variables from diferent interrupts and functions. Can cause some trouble if the program increases in size or more interrupt functions with different priorities are programmed. Declaring variables as volatile might be a good thing to do in these cases but will reduce execution time.
 -The overflow of the int32 for the timer does not affect the periodicity of the debug LEDs.
+-Polling the status of the SPI before attemping to use it can also be a good feature but might slow down the execution time if managed well.
+-The 32 bit comparison can cause trouble in certain architectures
+
+# BUILD ENVIRONMENT #
+I use make and cmake as much as I can, due to the simplicity and size of the project make is enough.
+My prefered editor is VIM
+(In the past I've used MPLABX(netbeans), visual studio and atom)
+
+== To compile (in a linux machine) ==
+
+make e1.bin
+
+
+
+

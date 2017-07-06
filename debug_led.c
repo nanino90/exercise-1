@@ -14,7 +14,7 @@ void debug_led()
 
 	time = TimetGetus();
 //It is run every second
-	if( !(time%1000) )
+	if( !(time%1000000) )
 	{
 		switch(cc->status)
 		{

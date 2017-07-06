@@ -26,8 +26,10 @@ int main()
 				break;
 
 			case EXECUTE_COMMAND:
-			cc->status =READ_EEPROM;
 			RobotTask(cc->command);
+			//This if is to ensure the interrupt function hasn't triggered the ERROR state
+			if( cc->status == EXECUTE_COMMAND)
+				cc->status =READ_EEPROM;
 				break;
 
 			case ERROR:

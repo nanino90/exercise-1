@@ -23,7 +23,7 @@ void TimerISR(void)
 	if(cc==NULL)
 		cc = get_controller_context();
 
-//Disable the CS for the EEPROM to avoid collisions
+	//Disable the CS for the EEPROM to avoid possible collisions with EEPROM
 	SPIEepromDisable();
 
 	if(CheckSensor())
